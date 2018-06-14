@@ -116,7 +116,7 @@ python script_phaseI.py 0 &> script.log
 ```
 
 ### CRAB
-Edit 'crab/multicrab_config.py'. The main thing to check are:
+Edit 'crab/phaseI_crab_config.py'. The main thing to check are:
 * Datasets: Follow the description in the top of the file
 * name
 * `config.Data.unitsPerJob`
