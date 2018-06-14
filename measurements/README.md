@@ -4,17 +4,17 @@
 These are the options to produce the usual performance plots:
 
 **2D plots and projections:**
-```python
+```bash
 python shapeComparison.py  --mc --data --deepcsv --perJetComp --sameTagger --skip1DComp 
 ```
 
 **Inclusive efficiency (no T&P):**
-```pathon
+```bash
 python efficiencies.py --data --mc --deepcsv --deepcsvWP 0.6 --ptordered --inclusive --ninclusive 15
 ```
 
 **Plots with flavour splitting and T&P plots:**
-```python
+```bash
 python flavourComp.py --data --deepcsv --inclusive --TnP
 ```
 
