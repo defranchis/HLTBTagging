@@ -568,13 +568,21 @@ def launchNtupleFromHLT(fileOutput,filesInput, secondaryFiles, maxEvents,preProc
             f = open(configfile, 'w')
             f.write(cmsswConfig.process.dumpPython())
             f.close()
+
             print "sed -i s/inf\)/float\( \\'inf\\'\)\)/g "+configfile
             print "sed -i s/inf,/float\(\\'inf\\'\),/g "+configfile
+            print "sed -i s/inf\\'\),\ inf/inf\\'\),\ float\(\\'inf\\'\)/g "+configfile
+            print "sed -i s/inf\\'\),\ -inf/inf\\'\),\ -float\(\\'inf\\'\)/g "+configfile
             os.system("sed -i s/inf\)/float\(\\'inf\\'\)\)/g "+configfile)
             os.system("sed -i s/inf,/float\(\\'inf\\'\),/g "+configfile)
+            os.system("sed -i s/inf\\'\),\ inf/inf\\'\),\ float\(\\'inf\\'\)/g "+configfile)
+            os.system("sed -i s/inf\\'\),\ -inf/inf\\'\),\ -float\(\\'inf\\'\)/g "+configfile)
             cmsRun_config = "mod_"+cmsRun_config
         print "Using: {0}".format(cmsRun_config)
         preprocessor = CmsswPreprocessor(cmsRun_config)
+        print "----"
+        print preprocessor.__dict__
+        print "----"
         cfg = MCComponent("OutputHLT",filesInput, secondaryfiles=secondaryFiles)
         print "Run cmsswPreProcessing using:"
         print cfg.name
@@ -582,7 +590,9 @@ def launchNtupleFromHLT(fileOutput,filesInput, secondaryFiles, maxEvents,preProc
         print cfg.secondaryfiles
         print
         try:
+            print "----"
             preprocessor.run(cfg,".",firstEvent,maxEvents)
+            print "++++"
         except:
             print "cmsswPreProcessing failed!"
             if not local:
