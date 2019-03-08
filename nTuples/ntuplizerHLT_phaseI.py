@@ -657,7 +657,7 @@ def launchNtupleFromHLT(fileOutput,filesInput, secondaryFiles, maxEvents,preProc
     #VerticesL3_source, VerticesL3_label                 = Handle("vector<reco::Vertex>"), ("hltVerticesL3")
 
     #The rest
-    triggerBits, triggerBitLabel                        = Handle("edm::TriggerResults"), ("TriggerResults::MYHLT")
+    triggerBits, triggerBitLabel                        = Handle("edm::TriggerResults"), ("TriggerResults::HLT")
 
 
 
@@ -875,7 +875,7 @@ def launchNtupleFromHLT(fileOutput,filesInput, secondaryFiles, maxEvents,preProc
             if checkTriggerIndex(triggerName,index,names.triggerNames()):
                 triggerVars[triggerName][0] = triggerBits.product().accept(index)
                 #print triggerName,"acc:",triggerBits.product().accept(index)
-                if triggerName.startswith("HLT") and not ( triggerName.startswith("NoFilter") or triggerName.endswith("FirstPath") or triggerName.endswith("FinalPath")):
+                if triggerName.startswith("HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_") or triggerName.startswith("HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_")
                     if triggerBits.product().accept(index):
                         triggerspassing.append(triggerName)
             else:
